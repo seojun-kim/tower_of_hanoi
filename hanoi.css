@@ -1,0 +1,194 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+    background-color: #3d4f57fa;
+}
+
+#con {
+    display: flex;
+}
+  
+button {
+    height: 35px;
+    border: none;
+    cursor: move;   
+    font-size: 0rem;
+    position: relative;
+    /* text-indent: -9999px; */
+    cursor: pointer;
+}
+
+#btn1 {
+    width: 275px;
+    background-color: blue;
+}
+#btn2 {
+    width: 240px;
+    margin-left: 17.5px;
+    background-color: rgb(87, 195, 238);
+}
+#btn3 {
+    width: 205px;
+    margin-left: 35px;
+    background-color: rgb(6, 160, 6);
+}
+#btn4 {
+    width: 170px;
+    margin-left: 52.5px;
+    background-color: rgb(167, 230, 74);
+}
+#btn5 {
+    width: 135px;
+    margin-left: 70px;
+    background-color: rgb(230, 230, 45);
+}
+#btn6 {
+    width: 100px;
+    margin-left: 87.5px;
+    background-color: rgb(233, 155, 9);
+}
+#btn7 {
+    width: 65px;
+    margin-left: 105px;
+    background-color: red;
+}   
+  
+.container {
+    margin: 10px;
+    height: 280px;
+    padding: 12px 10px 10px 10px;
+    background-color: #3d4e56fa;
+    border-radius: 8px;
+    width: 273px;
+    /* transform: scale(-1); */
+    position: relative;
+    flex-direction: column-reverse;
+    display: flex;
+} 
+  
+.draggable.dragging {
+    opacity: 0.5;
+}
+
+/* .draggable {
+    -webkit-user-drag: none;
+} */
+
+.col {
+    margin-left: 131.5px;
+    height: 260px;
+    background-color: gray;       
+    width: 10px;
+    position: absolute;
+}
+
+.arrow {
+    background-color: #3d4e5600;
+    width: 40px;
+    height: 20px;
+    padding: 1px 0px 1px 0px;
+    cursor: pointer;
+}
+
+.arrowBtn {
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    flex-direction: column;
+}
+
+#addBtn {
+    transform: scale(-1);
+}
+
+.count, .min_cnt {
+    width: 55px;
+    height: 37px;
+    border: 3px solid;
+    font-size: 27px;
+    text-align: center;
+    margin-left: 145px;
+}
+
+.ringCnt {
+    width: 35px;
+    height: 37px;
+    border: 3px solid;
+    font-size: 27px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.func {
+    display: flex;
+    text-align: center;
+    font-size: 27px;
+    margin-left: 10px;
+}
+
+.timer-start, .finish {
+    font-size: 27px;
+    height: 43px;
+    /* margin-top: 1px; */
+    border: 3px solid;
+    background-color: #3d4f57fa;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.timer-box {
+    margin-left: 145px;
+}
+
+.resetBtn {
+    background-color: #3d4f57fa;
+    cursor: pointer;
+    margin-left: 145px;
+}
+
+.help_btn {
+    background-color: #3d4f57fa;
+    margin-top: 10px;
+} 
+
+#help_info {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:rgba(0,0,0,.5);
+    text-align: center;
+    font-size: 0;
+}
+
+#help_info::after {
+    display: inline-block;
+    height: 100%;
+    vertical-align:middle; 
+    content:'';
+}
+
+#help_info .pop_inner {
+    display: inline-block;
+    /* padding: 20px 30px; */
+    background-color: #fff;
+    vertical-align: middle;
+    font-size: 20px;
+    text-align: left;
+    width: 900px;
+    height: 500px;
+    padding-left: 20px;
+}
+
+.x_btn {
+    float: right;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}

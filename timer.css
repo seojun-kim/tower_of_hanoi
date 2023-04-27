@@ -1,0 +1,13 @@
+.timer-box {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* margin-top: 125px; */
+}
+
+.timer {
+    font-size: 27px;
+    /* margin-bottom: 30px; */
+    /* transition: all 1s; */
+}
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="hanoi.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    <div id="con">
+    <div class="container" id="con1">
+        <div class="col"></div>
+        <button class="draggable" draggable="true" id="btn1">1</button>
+        <button class="draggable" draggable="true" id="btn2">2</button>
+        <button class="draggable" draggable="true" id="btn3">3</button>
+        <button class="draggable" draggable="true" id="btn4">4</button>
+        <button class="draggable" draggable="true" id="btn5">5</button>
+        <button class="draggable" draggable="true" id="btn6">6</button>
+        <button class="draggable" draggable="true" id="btn7">7</button>
+    </div>
+    <div class="container" id="con2">
+        <div class="col"></div>
+    </div>
+    <div class="container" id="con3">
+        <div class="col"></div>
+    </div>
+    </div>
+
+    <div class="func">
+        링 개수
+        <div class="ringCnt">7</div>
+        <div class="arrowBtn">
+            <button type="button" class="arrow" id="addBtn" onclick='addRing()'><img src="image/arrow.png" height="20px" width="35px"/></button>
+            <button type="button" class="arrow" id="subBtn" onclick='subRing()'><img src="image/arrow.png" height="20px" width="35px"/></button>
+        </div>
+        <div class="count">0</div>
+    </div> 
+    
+    <script>
+    let draggables = document.querySelectorAll(".draggable");
+    let containers = document.querySelectorAll(".container");
+
+    //console.log(draggables);
+    //console.log(containers);
+
+    const con1 = document.querySelector('#con1');
+    const con2 = document.querySelector('#con2');
+    const con3 = document.querySelector('#con3');
+
+    const count = document.querySelector('.count');
+    const ringCntDiv = document.querySelector('.ringCnt');
+    //console.log(count);
+    
+    let dragg;
+    let ringCnt = 7;
+    let hiddenNum = 0;
+
+    draggables.forEach(draggable => {
+        //console.log('draggable');
+        //console.log(draggable);
+        dragg = draggable;
+ 
+        draggable.addEventListener("dragstart", () => {
+            if(
+                con2.innerText.charAt(con2.innerText.length - 1) == draggable.innerText ||
+                con1.innerText.charAt(con1.innerText.length - 1) == draggable.innerText ||
+                con3.innerText.charAt(con3.innerText.length - 1) == draggable.innerText 
+            ) {
+                dragg = draggable;
+
+                // console.log(con1.innerText.charAt(con1.innerText.length - 1));
+                // console.log(con2.innerText.charAt(con2.innerText.length - 1));
+                // console.log(con3.innerText.charAt(con3.innerText.length - 1));
+                // console.log(draggable.innerText);
+                // console.log(draggables);    
+                // console.log(containers);
+                // console.log(con1);
+                // console.log(con1.querySelectorAll(".draggable"));
+                draggable.classList.add("dragging");
+            }
+        });
+    
+        draggable.addEventListener("dragend", () => {
+            draggable.classList.remove("dragging");
+
+            count.innerText = parseInt(count.innerText) + 1;
+            //console.log(count.innerText);
+        });   
+    }); 
+    
+    containers.forEach(container => {
+        
+        container.addEventListener("dragover", e => {
+            e.preventDefault();
+            if(!container.innerText || parseInt(dragg.innerText) > container.innerText.charAt(container.innerText.length - 1)) {
+                if(document.querySelector(".dragging")) {
+                    const draggable = document.querySelector(".dragging");
+                    container.appendChild(draggable);
+                }
+            }
+        }); 
+    });
+
+    containers.forEach(containers => {
+
+    })
+    
+    function addRing() {
+        if(ringCnt < 7) { 
+            let btn = document.getElementById('btn' + hiddenNum);
+            btn.style.display = '';
+            hiddenNum--;
+            ringCnt++;
+            reloadF();
+        }
+    }
+
+    function subRing() {
+        if(ringCnt > 3) {
+            hiddenNum++;
+            ringCnt--;
+            let btn = document.getElementById('btn' + hiddenNum);
+            btn.style.display = 'none';
+            reloadF();
+        }
+    }
+
+    function reloadF() {
+        for(let i = 1; i <= 7; i++) {
+            let btn = document.getElementById('btn' + i);
+            con1.appendChild(btn);  
+            ringCntDiv.innerText = ringCnt;
+            count.innerText = 0;
+
+            // draggables = document.querySelectorAll(".draggable");
+            // containers = document.querySelectorAll(".container");
+
+            // console.log(draggables);
+            // console.log(containers); 
+        }   
+    }
+
+    /* function getRingNum() {
+
+        let strCon1 = con1.innerText.replace(/(\s*)/g, "");
+        let strCon2 = con2.innerText.replace(/(\s*)/g, "");
+        let strCon3 = con3.innerText.replace(/(\s*)/g, "");
+        
+        let num1 = isNaN(parseInt(strCon1.charAt(0))) ? 7 : parseInt(strCon1.charAt(0));
+        let num2 = isNaN(parseInt(strCon2.charAt(0))) ? 7 : parseInt(strCon2.charAt(0));
+        let num3 = isNaN(parseInt(strCon3.charAt(0))) ? 7 : parseInt(strCon3.charAt(0));
+
+        // console.log(parseInt(con2.innerText.charAt(con2.innerText.length - 1)));
+        // console.log(typeof(parseInt(con2.innerText.charAt(con2.innerText.length - 1))));
+         console.log(num1);
+         console.log(num2);
+         console.log(num3);
+
+        if(num1 > num2) {
+            num1 = num3 < num2 ? num3 : num2;
+        } else {
+            num1 = num1 < num3 ? num1 : num3;
+        }
+
+        return num1;
+    } */
+    </script>
+</body>
+</html>
