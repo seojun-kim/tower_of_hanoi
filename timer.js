@@ -10,10 +10,10 @@ function startButton() {
     resetButton();
     updateTimer();
     stopButton();
-    start = true;
     cron = setInterval(updateTimer, 1000);
     timer.classList.add('start');
     reloadF();
+    start = true;
 }
 
 function stopButton() {

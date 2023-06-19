@@ -67,7 +67,7 @@
         </div>
     </div>  
 
-    <a href="algo.html" class="a_algo">하노이의 탑 알고리즘 보기</a>
+    <!-- <a href="algo.html" class="a_algo">하노이의 탑 알고리즘 보기</a> -->
     
     <script>
     let draggables = document.querySelectorAll(".draggable");
@@ -216,6 +216,7 @@
     function finishChk() {
         if(con3.innerText.split("\n").length === ringCnt && start) {
             stopButton();
+            alert('탑 다 쌓음');
         } else {
             alert('탑을 다 쌓지 못했습니다.');
         }
