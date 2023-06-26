@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="hanoi.css">
     <link rel="stylesheet" href="timer.css">
     <script src="js/mycookie.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         let myid = getCookie('myid');
-        if(myid != null) {
-            location.href = 'loginhanoi.html';
+        if(myid == null) {
+            location.href = 'hanoi.html';
         }
     </script>
 </head>
@@ -37,10 +38,9 @@
         <a href="#help_info" class="btn_open"><img src="image/help.png" height="20px" width="20px" class="help_btn"/></a>    
     </div>
     <div>
-        <button type="button" class="signup" onclick="location.href='join.html'">회원가입</button>
-        <button type="button" class="login" onclick="location.href='login.html'">로그인</button>
+        <button id="logout" class="logout" type="button">로그아웃</button>
     </div>
-    </div>
+    </div>  
 
     <div class="func">
         RING
@@ -228,8 +228,54 @@
 
     //con3에 탑을 다 쌓았는지 확인
     function finishChk() {
-        alert('로그인해야 합니다.')
+        if(con3.innerText.split("\n").length === ringCnt && start) {
+            stopButton();
+            $.ajax({
+                url: "http://localhost:8080/cleartime/add",
+                async: true,
+                type: 'post',
+                data: JSON.stringify({
+                    "clearTime": TIME,
+                    "stage": ringCnt,
+                }),
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                beforeSend: function(res) {
+                    res.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+                },
+                success: function(res) {
+                    console.log('success', res);
+                    alert('성공');
+                },
+                complete:function(res) {}
+            })
+        } else {
+            alert('탑을 다 쌓지 못했습니다.');
+        }
     }
+
+    $('#logout').on('click', function() {
+        $.ajax({
+            url: "http://localhost:8080/members/logout",
+            async: true,
+            type: 'delete',
+            processData: false,
+            dataType: 'text',
+            contentType: 'application/json; charset=utf-8', // text, xml, json, script, html
+            beforeSend: function (res) {
+                res.setRequestHeader("Authorization", localStorage.getItem("accessToken"));
+            }, // 요청하기 전에 호출
+            success: function (res) {
+                deleteCookie("myid");
+                localStorage.clear();
+                window.location = 'hanoi.html';
+            }, // 요청 완료 시
+            error: function (res, status) {
+                console.log("error", res.responseText.token);
+            }, // 요청 실패 시
+            complete: function (res) {} // 요청 결과 상관 없이 무조건 호출
+        });
+    })
 
     </script>
     <script type="text/javascript" src="timer.js"></script>

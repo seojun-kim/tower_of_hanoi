@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="css/mystyle.css" rel="stylesheet">
+    <link href="css/myfont.css" rel="stylesheet">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/mycookie.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="m-3"></div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-2 pt-1">
+                <h1><a class="nav-link" href="index.html">하노이의 탑</a></h1>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    <div class="m-3"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-11">
+                <h3>로그인</h3>
+            </div>
+        </div>
+        <div class="row m-3 p-3 justify-content-center" style="height: 65vh;">
+            <div class="col-1"></div>
+            <div class="col-8 my-3">
+                <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <form class="validation-form" novalidate>
+                            <div class="mb-3">
+                                <label for="email">아이디</label>
+                                <input type="email" class="form-control" id="username" placeholder="아이디를 입력해주세요."
+                                    required>
+                                <div class="invalid-feedback">
+                                    아이디 입력해주세요.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password">패스워드</label>
+                                <input type="password" class="form-control" id="password" placeholder="패스워드를 입력해주세요.">
+                            </div>
+
+                            <div class="mb-4"></div>
+                            <button class="btn btn-primary btn-lg btn-block" type="button" id="login">로그인</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function loginfn() {
+        $.ajax({
+            url: 'http://localhost:8080/members/login',
+            async: true, // false 일 경우 동기 요청으로 변경
+            type: 'post', // POST, GET, PUT
+            data: JSON.stringify({
+                "username": $('#username').val(),
+                "password": $('#password').val(),
+            }),
+            processData: false,
+            dataType: 'text',
+            contentType: 'application/json; charset=utf-8', // text, xml, json, script, html
+            beforeSend: function (res) {}, // 요청하기 전에 호출
+            success: function (res) {
+                console.log('success', res);
+                res = JSON.parse(res);
+                setCookie('myid', $('#username').val(), '60');
+                localStorage.setItem("accessToken", "Bearer " + res.accessToken);
+                localStorage.setItem("refreshToken", res.refreshToken);
+                console.log(localStorage.getItem("accessToken"));
+                console.log(getCookie('myid'));
+                window.location = 'hanoi.html';
+            }, // 요청 완료 시
+            error: function (res, status) {
+                console.log("error", res.responseText.token);
+            }, // 요청 실패 시
+            complete: function (res) {} // 요청 결과 상관 없이 무조건 호출
+        });
+    }
+    $('#login').on('click', function () {
+        loginfn();
+    });
+    $("#password").keyup(function (e) {
+        if (e.which == 13) {
+            loginfn();
+        }
+    });
+</script>

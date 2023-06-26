@@ -1,7 +1,8 @@
 body {
     margin: 0 auto;
     padding: 0;
-    background-color: #3d4f57fa;
+    /* background-color: #3d4f57fa; */
+    background-color: #fff;
 }
 
 #con {
@@ -83,7 +84,7 @@ button {
 }
 
 .arrow {
-    background-color: #3d4e5600;
+    background-color: #fff;
     width: 40px;
     height: 20px;
     padding: 1px 0px 1px 0px;
@@ -131,9 +132,48 @@ button {
     height: 43px;
     /* margin-top: 1px; */
     border: 3px solid;
-    background-color: #3d4f57fa;
+    background-color: #fff;
     cursor: pointer;
     margin-right: 10px;
+}
+
+.logout {
+    font-size: 27px;
+    height: 43px;
+    border: 3px solid;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 800px;
+}
+
+.signup {
+    font-size: 27px;
+    height: 43px;
+    border: 3px solid;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 680px;
+}
+
+.login {
+    font-size: 27px;
+    height: 43px;
+    border: 3px solid;
+    background-color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.rank {
+    font-size: 27px;
+    height: 43px;
+    border: 3px solid;
+    background-color: #fff;
+    cursor: pointer;
+    margin-left: 670px;
 }
 
 .timer-box {
@@ -141,13 +181,13 @@ button {
 }
 
 .resetBtn {
-    background-color: #3d4f57fa;
+    background-color: #fff;
     cursor: pointer;
     margin-left: 145px;
 }
 
 .help_btn {
-    background-color: #3d4f57fa;
+    background-color: #fff;
     margin-top: 10px;
 } 
 
